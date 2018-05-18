@@ -49,11 +49,16 @@ public class BroodjesRequest extends AsyncTask<Void, Void, String> {
         }
 
         if(arr != null){
+            System.out.println("DEBUG arr is niet null");
             try {
                 delgate.returnBroodjes(arr);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        else{
+            System.out.println("DEBUG arr is null");
+            System.out.println("DEBUG RESPONSE " + object.toString());
         }
     }
 }

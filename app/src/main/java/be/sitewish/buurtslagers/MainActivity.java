@@ -17,15 +17,16 @@ import android.widget.ListView;
 import be.sitewish.buurtslagers.domain.AsyncBroodjes;
 import be.sitewish.buurtslagers.domain.AsyncResponse;
 import be.sitewish.buurtslagers.domain.BroodjesRequest;
+import be.sitewish.buurtslagers.domain.Controller;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AsyncBroodjes {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
-
+    private Controller controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listView = (ListView) findViewById(R.id.broodjes_list);
+        controller = new Controller();
 
         final ActionBar ab = getSupportActionBar();
 
@@ -52,11 +54,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        HashMap map = new HashMap();
-        map.put("api_key", "8e6c7b47e63f664c7c66d84fcf0588202d37c3939e9fd65bf7ad6d9df52d4c188bd9c745");
-        map.put("action", "GET");
-
-        BroodjesRequest broodjesRequest = new BroodjesRequest("https://api.sitewish.be/klant", map, new AsyncBroodjes()).execute();
+        controller.GetBroodjes();
+        controller.getBroodjes();
     }
 
     @Override
@@ -99,8 +98,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void returnBroodjes(Object output) {
-
-    }
 }

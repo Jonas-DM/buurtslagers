@@ -1,5 +1,7 @@
 package be.sitewish.buurtslagers.domain;
 
+import org.json.JSONArray;
+
 public interface AsyncBroodjes {
-    void returnBroodjes(Object output);
+    void returnBroodjes(JSONArray output);
 }

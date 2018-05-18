@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         mGebruikersNaamView.setError(getString(R.string.invalid_gebruikersnaam));
                     }
                     else if(output == -2){
-                        mPasswordView.setError(getString(R.string.error_invalid_password));
+                        mPasswordView.setError(getString(R.string.error_incorrect_password));
                     }
                     else{
                         System.out.println("LOGIN ingelogd");
