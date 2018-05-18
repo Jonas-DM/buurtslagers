@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Buurtslagers</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_gebruikersnaam">Gebruiker is niet gevonden.</string>
+    <string name="error_invalid_password">Wachtwoord is te kort.</string>
+    <string name="error_incorrect_password">Foutief wachtwoord.</string>
+    <string name="error_field_required">Verplicht veld.</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="logo_buurtslagers">logo buurtslagers</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="no_internet">Er is geen internetverbinding beschikbaar.</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
