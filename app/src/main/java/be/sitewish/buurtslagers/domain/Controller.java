@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Controller implements AsyncBroodjes{
+public class Controller{
 
     //region Properties
     public static String URL = "https://api.sitewish.be/";
@@ -65,19 +65,24 @@ public class Controller implements AsyncBroodjes{
         }
     }
 
-    public void GetBroodjes(){
-        HashMap map = new HashMap();
-        map.put("api_key", KEY);
-        map.put("action", "GET");
-
-        BroodjesRequest broodjesRequest = new BroodjesRequest(URL + "/broodje", map, this);
-        broodjesRequest.execute();
-    }
-
-    @Override
-    public void returnBroodjes(JSONArray output) {
-        setBroodjes(Broodje.fromJSON(output));
-        //ArrayList<Broodje> broodje = Broodje.fromJSON(output);
-        //System.out.println("DEBUG " + broodje.get(0).getNaam());
-    }
+//    public void GetBroodjes(){
+//        HashMap map = new HashMap();
+//        map.put("api_key", KEY);
+//        map.put("action", "GET");
+//
+//        BroodjesRequest broodjesRequest = new BroodjesRequest(URL + "/broodje", map, this);
+//        broodjesRequest.execute();
+//    }
+//
+//    @Override
+//    public void returnBroodjes(JSONArray output) {
+//        this.setBroodjes(Broodje.fromJSON(output));
+//        this.i = 5;
+//
+//        //setBroodjes(Broodje.fromJSON(output));
+//        //ArrayList<Broodje> broodje = Broodje.fromJSON(output);
+//        //System.out.println("DEBUG " + broodje.get(0).getNaam());
+//        System.out.println("DEBUG " + this.i);
+//        System.out.println("DEBUG " + broodjes.get(0).toString());
+//    }
 }

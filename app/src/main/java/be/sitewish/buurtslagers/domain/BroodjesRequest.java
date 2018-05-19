@@ -56,9 +56,5 @@ public class BroodjesRequest extends AsyncTask<Void, Void, String> {
                 e.printStackTrace();
             }
         }
-        else{
-            System.out.println("DEBUG arr is null");
-            System.out.println("DEBUG RESPONSE " + object.toString());
-        }
     }
 }
