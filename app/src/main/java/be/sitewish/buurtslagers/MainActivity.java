@@ -3,8 +3,6 @@ package be.sitewish.buurtslagers;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,28 +14,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import be.sitewish.buurtslagers.domain.AsyncBroodjes;
-import be.sitewish.buurtslagers.domain.AsyncResponse;
 import be.sitewish.buurtslagers.domain.Broodje;
-import be.sitewish.buurtslagers.domain.BroodjesRequest;
 import be.sitewish.buurtslagers.domain.Controller;
 import be.sitewish.buurtslagers.domain.RequestHandler;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
-    private Controller controller;
+    private Controller controller = ((Controller) this.getApplication());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +41,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listView = (ListView) findViewById(R.id.broodjes_list);
-        controller = new Controller();
 
         final ActionBar ab = getSupportActionBar();
 
@@ -69,7 +62,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Broodje broodje = (Broodje) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(MainActivity.this, be.sitewish.buurtslagers.Broodje.class);
+                Intent intent = new Intent(MainActivity.this, BroodjeActivity.class);
                 intent.putExtra("Broodje", broodje);
                 MainActivity.this.startActivity(intent);
                 //Toast.makeText(MainActivity.this, "Je koos " + broodje.getNaam(), Toast.LENGTH_SHORT).show();
@@ -113,7 +106,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_winkelmandje) {
-
+            Intent intent = new Intent(this, WinkelmandjeActivity.class);
+            this.startActivity(intent);
+            this.finish();
         } else if (id == R.id.nav_account) {
 
         } else if (id == R.id.nav_uitloggen) {
@@ -126,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setListView(){
-        BroodjeAdapter broodjeAdapter = new BroodjeAdapter(this, controller.getBroodjes());
+        BroodjeAdapter broodjeAdapter = new BroodjeAdapter(this, ((Controller) this.getApplication()).getBroodjes());
         listView.setAdapter(broodjeAdapter);
     }
 
@@ -161,7 +156,7 @@ public class MainActivity extends AppCompatActivity
 
             if(arr != null){
                 try{
-                    controller.setBroodjes(Broodje.fromJSON(arr));
+                    ((Controller) MainActivity.this.getApplication()).setBroodjes(Broodje.fromJSON(arr));
                     setListView();
                 }
                 catch (Exception e){

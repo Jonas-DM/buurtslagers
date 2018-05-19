@@ -1,10 +1,10 @@
 package be.sitewish.buurtslagers;
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
-import android.service.media.MediaBrowserService;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,28 +14,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+import be.sitewish.buurtslagers.domain.Controller;
 
-public class Broodje extends AppCompatActivity
+public class WinkelmandjeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    be.sitewish.buurtslagers.domain.Broodje broodje = null;
-
-    TextView tvNaam;
-    TextView tvPrijs;
-    EditText etAantal;
-    EditText etOpmerking;
-
+    ListView listView;
+    TextView txtTotaal;
+    Controller controller = ((Controller) this.getApplication());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_broodje);
+        setContentView(R.layout.activity_winkelmandje);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final android.support.v7.app.ActionBar ab = getSupportActionBar();
+        final ActionBar ab = getSupportActionBar();
 
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -51,16 +47,13 @@ public class Broodje extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Bundle data = getIntent().getExtras();
-        broodje = (be.sitewish.buurtslagers.domain.Broodje) data.getParcelable("Broodje");
+        listView = (ListView) findViewById(R.id.listWinkelmand);
+        WinkelmandjeAdapter winkelmandjeAdapter = new WinkelmandjeAdapter(this, ((Controller) this.getApplication()).getWinkelmandje().getWinkelmand());
 
-        tvNaam = (TextView) findViewById(R.id.txtNaam);
-        tvPrijs = (TextView) findViewById(R.id.txtPrijs);
-        etAantal = (EditText) findViewById(R.id.etAantal);
-        etOpmerking = (EditText) findViewById(R.id.etOpmerking);
+        listView.setAdapter(winkelmandjeAdapter);
 
-        tvNaam.setText("Broodje " + broodje.getNaam());
-        tvPrijs.setText("€ " + broodje.getPrijs().toString());
+        txtTotaal = (TextView) findViewById(R.id.txtTotaal);
+        txtTotaal.setText("€ " + ((Controller) this.getApplication()).getWinkelmandje().getTotaal());
     }
 
     @Override
@@ -76,7 +69,7 @@ public class Broodje extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.broodje, menu);
+        getMenuInflater().inflate(R.menu.winkelmandje, menu);
         return true;
     }
 
@@ -101,17 +94,18 @@ public class Broodje extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
+            this.finish();
+        } else if (id == R.id.nav_winkelmandje) {
+            Intent intent = new Intent(this, WinkelmandjeActivity.class);
+            this.startActivity(intent);
+            this.finish();
+        } else if (id == R.id.nav_account) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_uitloggen) {
 
         }
 
